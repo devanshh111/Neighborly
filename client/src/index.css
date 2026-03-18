@@ -1,0 +1,334 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Font Faces ─────────────────────────────────── */
+@font-face {
+  font-family: "Anthropic Sans";
+  src:
+    url("/fonts/AnthropicSans-Bold.woff2") format("woff2"),
+    url("/fonts/AnthropicSans-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Anthropic Sans";
+  src:
+    url("/fonts/AnthropicSans-Regular.woff2") format("woff2"),
+    url("/fonts/AnthropicSans-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Anthropic Serif";
+  src:
+    url("/fonts/AnthropicSerif-Regular.woff2") format("woff2"),
+    url("/fonts/AnthropicSerif-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom design system for Neighborly */
+@layer base {
+  :root {
+    --font-serif: "Anthropic Serif", Georgia, "Times New Roman", serif;
+    --font-sans: "Anthropic Sans", Arial, Helvetica, sans-serif;
+
+    --background: 210 20% 99%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 214 32% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 214 32% 96%;
+    --muted-foreground: 215.4 16.3% 43%;
+
+    --accent: 142.1 70% 42%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 88%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --brand: 27 96% 61%;
+    --brand-foreground: 31 97% 72%;
+
+    --success: 142 70% 42%;
+    --success-foreground: 142 70% 18%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 20%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --card: 224 71% 6%;
+    --card-foreground: 213 31% 91%;
+
+    --popover: 224 71% 6%;
+    --popover-foreground: 213 31% 91%;
+
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 223 47% 11%;
+    --muted-foreground: 215 20.2% 65%;
+
+    --accent: 142.1 70% 45%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 216 34% 17%;
+    --input: 216 34% 17%;
+    --ring: 217.2 91.2% 59.8%;
+
+    --sidebar-background: 224 71% 4%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-primary: 217.2 91.2% 59.8%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 223 47% 11%;
+    --sidebar-accent-foreground: 213 31% 91%;
+    --sidebar-border: 216 34% 17%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --brand: 31 97% 72%;
+    --brand-foreground: 27 96% 61%;
+
+    --success: 142 70% 45%;
+    --success-foreground: 142 70% 82%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 38 92% 85%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    transition: color-scheme 0.3s;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+  }
+
+  /* UI chrome: keep navigation/forms/buttons in Sans everywhere */
+  button,
+  input,
+  select,
+  textarea,
+  label,
+  nav,
+  [role="button"],
+  [data-radix-collection-item],
+  [data-slot="tabs-list"],
+  [data-slot="tabs-trigger"] {
+    font-family: var(--font-sans);
+  }
+
+  /* Long-form copy remains Serif by default */
+  p,
+  blockquote,
+  figcaption {
+    font-family: var(--font-serif);
+  }
+
+  /* Smooth theme transitions for core elements */
+  .dark body,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .delay-100 {
+    animation-delay: 100ms;
+  }
+  .delay-300 {
+    animation-delay: 300ms;
+  }
+  .delay-700 {
+    animation-delay: 700ms;
+  }
+  .delay-1000 {
+    animation-delay: 1000ms;
+  }
+}
+
+/* Custom animations for smooth interactions */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Stagger animation for grid cards */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.grid > [style*="animation-delay"] {
+  animation: cardEnter 0.4s ease-out;
+}
+
+/* Theme-aware section backgrounds */
+.section-alt {
+  @apply bg-muted/40;
+}
+.dark .section-alt {
+  background: hsl(224 71% 6% / 0.6);
+}
+
+/* Smooth card theme transition */
+@layer base {
+  [class*="card"],
+  [class*="Card"],
+  [class*="badge"],
+  [class*="Badge"],
+  button,
+  input,
+  select,
+  textarea,
+  nav,
+  header,
+  section {
+    transition:
+      background-color 0.3s ease,
+      border-color 0.3s ease,
+      box-shadow 0.3s ease,
+      color 0.2s ease;
+  }
+}
+
+/* Dark mode card glow/lift */
+.dark .card-elevated {
+  box-shadow:
+    0 0 0 1px hsl(216 34% 17%),
+    0 4px 24px -4px rgba(0, 0, 0, 0.35);
+}
+
+/* Light mode card soft shadow */
+.card-elevated {
+  box-shadow:
+    0 0 0 1px hsl(214.3 31.8% 91.4% / 0.5),
+    0 4px 16px -4px rgba(0, 0, 0, 0.08),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+/* Glassmorphism utility */
+.glass {
+  @apply backdrop-blur-md;
+  background: hsl(var(--card) / 0.75);
+  border: 1px solid hsl(var(--border) / 0.5);
+}
+.dark .glass {
+  background: hsl(var(--card) / 0.6);
+  border: 1px solid hsl(var(--border) / 0.3);
+}
+
+/* Improved scrollbar for dark mode */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: hsl(224 71% 4%);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(216 34% 22%);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: hsl(216 34% 30%);
+}
